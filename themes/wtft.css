@@ -1,0 +1,57 @@
+.window-title {
+    font-family: "MyCrackedFont";
+    text-transform: uppercase;
+}
+
+.bk-green {
+    background: #008000;
+}
+
+.bk-darkred {
+    background:#600001;
+}
+
+.bk-red {
+    background: #af0000;
+}
+
+.bk-orange {
+    background: #ff8c00;
+}
+
+.bk-white {
+    background: #e0e0e0;
+}
+
+.button {
+    border: 2px solid white;
+    border-radius:0;
+    text-transform: uppercase;
+    font-family: "MyCrackedFont";
+    font-size:28px;
+}
+
+.round-button {
+    border-radius:100%;
+}
+
+.button:hover {
+    filter: brightness(1.5);
+}
+
+.button span {
+    margin:5px;
+}
+
+.bottom-div-border {
+    background: linear-gradient(90deg, transparent 30%, rgb(107, 107, 107) 50%, transparent 70%);
+}
+
+.window-standard-stopwatch .window-buttonrow {
+    grid-template-columns: 130px 130px 130px;
+}
+
+.modes-boxes .mode-box span.title {
+    text-transform: uppercase;
+    font-family: "MyCrackedFont";
+}

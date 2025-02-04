@@ -2,182 +2,52 @@
 
 <head>
     <title>WOD Timer</title>
+    <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="./img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./img/favicon-16x16.png">
     <link href='https://fonts.googleapis.com/css?family=Noto Sans' rel='stylesheet'>
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./themes/wtft.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-            margin: 0;
-            background: #1d1d1d;
-            font-family: 'Noto Sans';
-            color: white;
-            width: 100%;
-        }
-
-        .window-standard-stopwatch {
-            width: 100%;
-            height: 100vh;
-        }
-
-        .window-buttonrow {
-            height: 150px;
-            display: grid;
-            grid-template-columns: 100px 100px 100px;
-            justify-content: center;
-            align-items: center;
-            grid-gap: 20px;
-            position: relative;
-        }
-
-        .bottom-div-border {
-            height: 1px;
-            width: 100%;
-            position: absolute;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent 30%, rgb(107, 107, 107) 50%, transparent 70%);
-        }
-
-        .button {
-            background: linear-gradient(rgb(142, 255, 142), green);
-            border: 1px solid #b3b3b3;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-shadow: 0px 0px 5px black, 0px 0px 5px black, 0px 0px 15px black;
-            border-radius: 5px;
-            user-select: none;
-            cursor: pointer;
-        }
-
-        .disabled {
-            opacity: 0.4;
-            filter: saturate(0.5);
-            cursor: default;
-            pointer-events: none;
-        }
-
-        .bk-green {
-            background: linear-gradient(rgb(142, 255, 142), green);
-        }
-
-        .bk-red {
-            background: linear-gradient(rgb(255, 152, 152), rgb(141, 6, 6));
-        }
-
-        .bk-orange {
-            background: linear-gradient(rgb(255, 201, 120), rgb(168, 76, 0));
-        }
-
-        .button span {
-            margin: 10px;
-        }
-
-        .window-standard-stopwatch .window-main {
-            height: calc(100% - 150px);
-        }
-
-        .window-standard-stopwatch .digital-stopwatch {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .window-standard-stopwatch .digital-stopwatch .text-main {
-            font-size: 200px;
-        }
-
-        @media screen and (max-width: 600px) {
-            .window-standard-stopwatch .digital-stopwatch .text-main {
-                font-size:60px;
-            }
-        }
-    </style>
-    <script>
-
-        new Audio("sounds/beep1.mp3");
-        new Audio("sounds/beep1_long.mp3");
-        new Audio("sounds/toggle.mp3");
-        new Audio("sounds/reset.mp3");
-
-        var std_stopwatch_intervalfunc = 0;
-        var std_stopwatch_ispaused = false;
-
-        function standardStopwatch_setText(str) {
-            document.querySelector(`.window-standard-stopwatch .digital-stopwatch .text-main`).innerHTML = str;
-        }
-
-        function formattedTimeString(seconds) {
-            return `${(Math.floor(seconds / 3600) % 24).toString().padStart(2, "0")}:${(Math.floor(seconds / 60) % 60).toString().padStart(2, "0")}:${(Math.round(seconds % 60)).toString().padStart(2, "0")}`;
-        }
-
-        function playSound(url) {
-            var audio = new Audio(url);
-            audio.play();
-        }
-
-        function standardStopwatch_intervalfunc() {
-            std_stopwatch_counter++;
-            standardStopwatch_setText(formattedTimeString(std_stopwatch_counter))
-        }
-
-        function standardStopwatch_start() {
-            document.querySelector(`#std_stopwatch_btn_start`).classList.add("disabled")
-            playSound("sounds/beep1.mp3")
-            standardStopwatch_setText(formattedTimeString(3))
-            setTimeout(() => {
-                playSound("sounds/beep1.mp3")
-                standardStopwatch_setText(formattedTimeString(2))
-            }, "1000");
-            setTimeout(() => {
-                playSound("sounds/beep1.mp3")
-                standardStopwatch_setText(formattedTimeString(1))
-            }, "2000");
-            setTimeout(() => {
-                playSound("sounds/beep1_long.mp3")
-                document.querySelector(`#std_stopwatch_btn_pause`).classList.remove("disabled")
-                document.querySelector(`#std_stopwatch_btn_reset`).classList.remove("disabled")
-                standardStopwatch_setText(formattedTimeString(0))
-                std_stopwatch_counter = 0
-                standardStopwatch_resume();
-            }, "3000");
-        }
-
-        function standardStopwatch_pause() {
-            window.clearInterval(std_stopwatch_interval);
-            std_stopwatch_ispaused = true;
-        }
-
-        function standardStopwatch_resume() {
-            std_stopwatch_interval = setInterval(standardStopwatch_intervalfunc, 1000);
-            std_stopwatch_ispaused = false;
-        }
-
-        function standardStopwatch_reset() {
-            playSound("sounds/reset.mp3")
-            standardStopwatch_pause();
-            standardStopwatch_setText(formattedTimeString(0))
-            document.querySelector(`#std_stopwatch_btn_start`).classList.remove("disabled")
-            document.querySelector(`#std_stopwatch_btn_pause`).classList.add("disabled")
-            document.querySelector(`#std_stopwatch_btn_reset`).classList.add("disabled")
-        }
-
-        function standardStopwatch_pauseToggle() {
-            playSound("sounds/toggle.mp3");
-            if (std_stopwatch_ispaused) {
-                standardStopwatch_resume();
-                document.querySelector(`#std_stopwatch_btn_pause span`).innerHTML = "Pause";
-            }
-            else {
-                standardStopwatch_pause();
-                document.querySelector(`#std_stopwatch_btn_pause span`).innerHTML = "Resume";
-            };
-        }
-    </script>
+    <script type="text/javascript" src="./js/main.js"></script>
 </head>
 
 <body>
-    <div class="window-standard-stopwatch">
+    <div class="allwindows-buttons">
+        <div class="button round-button bk-white" id="allwindows_buttons_zoomout" onclick="zoomOut();">
+            <img src="./img/zoomout.avif">
+        </div>
+        <div class="button round-button bk-white" id="allwindows_buttons_zoomreset" onclick="zoomReset();">
+            <img src="./img/zoomreset.avif">
+        </div>
+        <div class="button round-button bk-white" id="allwindows_buttons_zoomin" onclick="zoomIn();">
+            <img src="./img/zoomin.avif">
+        </div>
+        <div class="button round-button bk-white" id="allwindows_buttons_fullscreen" onclick="toggleFullScreen();">
+            <img src="./img/fullscreen.avif">
+        </div>
+    </div>
+    <div class="main-page">
+        <div class="window-title">
+            <span>WOD Timer</span>
+        </div>
+        <div class="modes-boxes">
+            <div class="mode-box bk-darkred" onclick="playSound(`sounds/button_press.mp3`); openWindowClass(`window-standard-stopwatch`)">
+                <span class="title">Standard</span>
+                <div class="description-box">
+                    <span>Standard Count-Up Timer</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="window window-standard-stopwatch" style="display:none;">
+        <div class="window-title">
+            <div class="button round-button bk-white" onclick="playSound(`sounds/button_press.mp3`); closeWindowClass(`window-standard-stopwatch`);">
+                <img src="./img/back.avif">
+            </div>
+            <span>Standard</span>
+        </div>
         <div class="window-buttonrow">
             <div id="std_stopwatch_btn_start" class="button bk-green" onclick="standardStopwatch_start()">
                 <span>Start</span>

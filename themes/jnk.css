@@ -1,0 +1,29 @@
+.bk-green {
+    background: linear-gradient(rgb(142, 255, 142), green);
+}
+
+.bk-darkred {
+    background:#600001;
+    background: linear-gradient(#d46e70, #600001);
+}
+
+.bk-red {
+    background: linear-gradient(rgb(255, 152, 152), rgb(141, 6, 6));
+}
+
+.bk-orange {
+    background: linear-gradient(rgb(255, 201, 120), rgb(168, 76, 0));
+}
+
+.bk-white {
+    background: linear-gradient(rgb(255, 255, 255), rgb(180, 180, 180));
+}
+
+.button {
+    transition: filter 0.1s ease;
+    text-shadow: 0px 0px 5px black, 0px 0px 5px black, 0px 0px 15px black;
+}
+
+.bottom-div-border {
+    background: linear-gradient(90deg, transparent 30%, rgb(107, 107, 107) 50%, transparent 70%);
+}
