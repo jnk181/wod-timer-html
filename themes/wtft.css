@@ -44,7 +44,7 @@
 }
 
 .bottom-div-border {
-    background: linear-gradient(90deg, transparent 30%, rgb(107, 107, 107) 50%, transparent 70%);
+    background: #6b6b6b;
 }
 
 .window-standard-stopwatch .window-buttonrow {

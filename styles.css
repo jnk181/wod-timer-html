@@ -57,6 +57,13 @@ span,img {
     align-items: center;
     justify-content: center;
     cursor:pointer;
+    float:left;
+    margin-right:15px;
+    margin-bottom:15px;
+}
+
+.mode-box.disabled {
+    display:none;
 }
 
 .modes-boxes .mode-box:hover {
@@ -69,6 +76,7 @@ span,img {
 
 .modes-boxes .mode-box span.title {
     font-size:30px;
+    text-align: center;
 }
 
 .modes-boxes .mode-box .description-box {
@@ -135,6 +143,7 @@ span,img {
     user-select: none;
     cursor: pointer;
     box-shadow: 0px 6px 0px #606c77;
+    overflow:hidden;
 }
 
 .button img {
